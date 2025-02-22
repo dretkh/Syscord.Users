@@ -10,8 +10,6 @@ namespace Syscord.Users.Api.V1;
 public sealed class UsersController(IFormat<User, ApiUser> userApiFormat) : Controller
 {
     private static readonly Dictionary<Guid, User> users = new();
-    
-    private readonly IFormat<User, ApiUser> userApiFormat = userApiFormat;
 
     [Route("{id:guid}")]
     [HttpGet]
@@ -25,6 +23,7 @@ public sealed class UsersController(IFormat<User, ApiUser> userApiFormat) : Cont
         throw new IllegalProgramException();
     }
 
+    [Route("")]
     [HttpPost]
     public Task CreateUserAsync()
     {
