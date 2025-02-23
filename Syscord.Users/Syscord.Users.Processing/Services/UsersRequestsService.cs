@@ -1,7 +1,8 @@
 using Optional;
 using Syscord.Users.Core;
+using Syscord.Users.Domain.Types;
+using Syscord.Users.Domain.Types.StorageAbstractions;
 using Syscord.Users.Service.Services.Requests;
-using Syscord.Users.Service.Storages;
 
 namespace Syscord.Users.Service.Services;
 
@@ -20,6 +21,8 @@ public sealed class UsersRequestsService(IUsersStorage storage) : IUsersRequests
 
     public async Task<Option<User>> GetAsync(Guid id, CancellationToken token) => await storage.GetAsync(id, token);
 
+    public IAsyncEnumerable<User> GetAllAsync(CancellationToken token)
+        => storage.GetAllAsync(token);
     private static void ValidateRequest(UserCreationRequest request)
     {
         if (string.IsNullOrEmpty(request.Login))

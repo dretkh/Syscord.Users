@@ -2,9 +2,9 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Syscord.Users.Api.V1.DI;
+using Syscord.Users.WebApi.V1.DI;
 
-namespace Syscord.Users.Api;
+namespace Syscord.Users.WebApi;
 
 public static class EntryPoint
 {

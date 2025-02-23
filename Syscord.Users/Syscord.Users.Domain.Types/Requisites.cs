@@ -1,4 +1,4 @@
-namespace Syscord.Users;
+namespace Syscord.Users.Domain.Types;
 
 public static class Requisites
 {

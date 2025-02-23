@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Syscord.Users;
+namespace Syscord.Users.Domain.Types;
 
 public sealed class User : UserBase
 {
