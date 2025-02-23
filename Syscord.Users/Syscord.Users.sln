@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syscord.Users.Api", "Syscor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syscord.Users.Core", "Syscord.Users.Core\Syscord.Users.Core.csproj", "{122137BD-F562-4A00-829E-CB82DFFB2873}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syscord.Users.Service", "Syscord.Users.Service\Syscord.Users.Service.csproj", "{84D76596-AE9F-4C37-94A7-5E4E3D850B13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syscord.Users.Storage.Postgre", "Syscord.Users.Storage.Postgre\Syscord.Users.Storage.Postgre.csproj", "{421DB252-B3D6-4D6F-945D-21A98CCFE560}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{122137BD-F562-4A00-829E-CB82DFFB2873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{122137BD-F562-4A00-829E-CB82DFFB2873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{122137BD-F562-4A00-829E-CB82DFFB2873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D76596-AE9F-4C37-94A7-5E4E3D850B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D76596-AE9F-4C37-94A7-5E4E3D850B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D76596-AE9F-4C37-94A7-5E4E3D850B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D76596-AE9F-4C37-94A7-5E4E3D850B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421DB252-B3D6-4D6F-945D-21A98CCFE560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421DB252-B3D6-4D6F-945D-21A98CCFE560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421DB252-B3D6-4D6F-945D-21A98CCFE560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421DB252-B3D6-4D6F-945D-21A98CCFE560}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

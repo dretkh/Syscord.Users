@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Microsoft.AspNetCore.Mvc;
 using Syscord.Users.Api.V1.Types;
 using Syscord.Users.Core;
@@ -7,9 +6,9 @@ using DomainUser = Syscord.Users.User;
 namespace Syscord.Users.Api.V1;
 
 [Route("v1/users")]
-public sealed class UsersController(IFormat<User, ApiUser> userApiFormat) : Controller
+public sealed class UsersController(IFormat<DomainUser, ApiUser> userApiFormat) : Controller
 {
-    private static readonly Dictionary<Guid, User> users = new();
+    private static readonly Dictionary<Guid, DomainUser> users = new();
 
     [Route("{id:guid}")]
     [HttpGet]
@@ -25,10 +24,17 @@ public sealed class UsersController(IFormat<User, ApiUser> userApiFormat) : Cont
 
     [Route("")]
     [HttpPost]
-    public Task CreateUserAsync()
+    public Task CreateUserAsync(string login)
     {
-        var user = DomainUser.Create(ImmutableDictionary<string, string>.Empty);
+        var user = DomainUser.Create(new Dictionary<string, string>
+        {
+            { Requisites.Login, login }
+        });
         users.Add(user.Id, user);
         return Task.CompletedTask;
     }
+
+    [Route("")]
+    [HttpGet]
+    public Task<IEnumerable<ApiUser>> GetAllAsync() => Task.FromResult(users.Values.Select(userApiFormat.Serialize));
 }

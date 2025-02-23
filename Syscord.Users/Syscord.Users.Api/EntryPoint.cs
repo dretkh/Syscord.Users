@@ -1,6 +1,8 @@
-﻿using Autofac.Extensions.DependencyInjection;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Syscord.Users.Api.V1.DI;
 
 namespace Syscord.Users.Api;
 
@@ -8,15 +10,17 @@ public static class EntryPoint
 {
     public static void Main(string[] args)
     {
-        var applicationBuilder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(args);
 
-        ConfigureContainer(applicationBuilder);
-        applicationBuilder.Services.AddControllers()
-        applicationBuilder.Services.AddProblemDetails();
-        AddHealthChecks(applicationBuilder);
+        ConfigureAutofacAsContainer(builder);
+        builder.Services.AddControllers();
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddProblemDetails();
+        AddHealthChecks(builder);
         
+        ConfigureAutofac(builder);
         
-        var app = applicationBuilder.Build();
+        var app = builder.Build();
         if (app.Environment.IsDevelopment())
         {
             app.MapHealthChecks("/alive", new HealthCheckOptions
@@ -24,9 +28,16 @@ public static class EntryPoint
                 Predicate = r => r.Tags.Contains("live")
             });
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            });
         }
-
+        
+        app.UseHttpsRedirection();
+        app.UseAuthorization();
+        app.MapControllers();
+        app.Run();
     }
 
     //TODO by dretkh: add application /health check
@@ -36,9 +47,17 @@ public static class EntryPoint
             .AddCheck("liveHealthCheck", () => HealthCheckResult.Healthy(), ["live"]);
     }
 
-    private static void ConfigureContainer(WebApplicationBuilder builder)
+    private static void ConfigureAutofacAsContainer(WebApplicationBuilder builder)
     {
         builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
         
+    }
+
+    private static void ConfigureAutofac(WebApplicationBuilder builder)
+    {
+        builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+        {
+            containerBuilder.RegisterModule(new ApiV1AutofacModule());
+        });
     }
 }
