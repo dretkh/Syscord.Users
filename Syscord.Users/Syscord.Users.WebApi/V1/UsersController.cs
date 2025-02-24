@@ -10,7 +10,7 @@ namespace Syscord.Users.WebApi.V1;
 [Route("v1/users")]
 public sealed class UsersController(
     IUsersRequestsService usersRequestsService,
-    IFormat<DomainUser, ApiUser> userApiFormat) : Controller
+    IConverter<DomainUser, ApiUser> userApiConverter) : Controller
 {
     // private static readonly Dictionary<Guid, DomainUser> users = new();
 
@@ -21,7 +21,7 @@ public sealed class UsersController(
         var user = await usersRequestsService.GetAsync(id, default);
 
         return user.Match(
-            some: userApiFormat.Serialize,
+            some: userApiConverter.Serialize,
             none: () => throw new IllegalProgramException());
     }
 
@@ -35,5 +35,5 @@ public sealed class UsersController(
     [Route("")]
     [HttpGet]
     public async Task<IReadOnlyCollection<ApiUser>> GetAllAsync()
-        => await usersRequestsService.GetAllAsync(default).Select(userApiFormat.Serialize).ToListAsync();
+        => await usersRequestsService.GetAllAsync(default).Select(userApiConverter.Serialize).ToListAsync();
 }

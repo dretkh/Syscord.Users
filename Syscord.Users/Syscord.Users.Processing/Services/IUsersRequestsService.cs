@@ -8,5 +8,5 @@ public interface IUsersRequestsService
 {
     Task CreateAsync(UserCreationRequest request, CancellationToken token);
     Task<Option<User>> GetAsync(Guid id, CancellationToken token);
-    IAsyncEnumerable<User> GetAllAsync(CancellationToken token);
+    IAsyncEnumerable<User> GetAllAsync();
 }

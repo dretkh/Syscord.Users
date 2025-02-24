@@ -8,7 +8,8 @@ namespace Syscord.Users.Domain.Types.StorageAbstractions;
 
 public interface IUsersStorage
 {
+    Task<bool> IsUniqueRequisiteValueTakenAsync(string name, string value, CancellationToken token);
     Task CreateAsync(User user, CancellationToken token);
     Task<Option<User>> GetAsync(Guid id, CancellationToken token);
-    IAsyncEnumerable<User> GetAllAsync(CancellationToken token);
+    IAsyncEnumerable<User> GetAllAsync();
 }

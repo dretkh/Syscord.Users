@@ -1,4 +1,4 @@
-namespace Syscord.Users.Storage.Postgre;
+namespace Syscord.Users.Storage.Postgre.Entities;
 
 public sealed class UserEntity
 {

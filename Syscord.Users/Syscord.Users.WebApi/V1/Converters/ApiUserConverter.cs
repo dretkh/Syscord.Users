@@ -4,7 +4,7 @@ using Syscord.Users.WebApi.V1.Types;
 
 namespace Syscord.Users.WebApi.V1.Converters;
 
-public sealed class ApiUserConverter : IFormat<User, ApiUser>
+public sealed class ApiUserConverter : IConverter<User, ApiUser>
 {
     public ApiUser Serialize(User data)
         => new()
