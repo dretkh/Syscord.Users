@@ -1,6 +1,6 @@
 using Syscord.Users.Core;
 
-namespace Syscord.Users.Service.Services.Requisites.Validations;
+namespace Syscord.Users.Service.Services.Requisites.Pipelines.LoginPreparationPipeline;
 
 public sealed class LoginFormatValidator : IValidator<string, None>
 {
